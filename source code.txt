@@ -1,0 +1,106 @@
+
+      import matplotlib.pyplot as plt
+
+# Data
+users = ['user1', 'user2', 'user3']
+emotions = ['joy', 'sadness', 'anger']
+scores = [1.0, 0.95, 0.85]
+colors = ['green', 'blue', 'red']
+
+# Plot
+plt.figure(figsize=(7, 4))
+bars = plt.bar(users, scores, color=colors)
+
+# Add emotion labels on top of bars
+for bar, emotion in zip(bars, emotions):
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, height - 0.05, emotion, ha='center', va='bottom', color='white')
+
+# Titles and labels
+plt.title('Emotion Confidence by User')
+plt.xlabel('User')
+plt.ylabel('Confidence Score')
+plt.ylim(0, 1.1)
+
+# Display plot
+plt.show()
+
+1.Heatmap program:
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Data for heatmap
+data = {
+    'User': ['user1', 'user2', 'user3'],
+    'Emotion': ['joy', 'sadness', 'anger'],
+    'Score': [1.0, 0.95, 0.85]
+}
+
+df = pd.DataFrame(data)
+heatmap_data = df.pivot(index='Emotion', columns='User', values='Score')
+
+# Plot heatmap
+plt.figure(figsize=(6, 4))
+sns.heatmap(heatmap_data, annot=True, cmap='coolwarm', vmin=0, vmax=1.1, cbar_kws={'label': 'Confidence Score'})
+
+plt.title('Emotion Confidence Heatmap')
+plt.xlabel('User')
+plt.ylabel('Emotion')
+plt.show()
+
+2.kernal density program
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Data for KDE
+data = {
+    'User': ['user1', 'user2', 'user3'],
+    'Emotion': ['joy', 'sadness', 'anger'],
+    'Score': [1.0, 0.95, 0.85]
+}
+
+df = pd.DataFrame(data)
+
+# KDE Plot
+plt.figure(figsize=(6, 4))
+sns.kdeplot(data=df, x='Score', fill=True, bw_adjust=0.5)
+
+plt.title('KDE of Emotion Confidence Scores')
+plt.xlabel('Confidence Score')
+plt.ylabel('Density')
+plt.xlim(0, 1.1)
+plt.grid(True)
+plt.show()
+
+
+3.Outlier program
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Data
+data = {
+    'User': ['user1', 'user2', 'user3'],-*
+    'Emotion': ['joy', 'sadness', 'anger'],
+    'Score': [1.0, 0.95, 0.85]
+}
+df = pd.DataFrame(data)
+
+# Plotting
+plt.figure(figsize=(8, 5))
+
+# Boxplot to detect outliers
+sns.boxplot(x='Emotion', y='Score', data=df, showfliers=True, width=0.3)
+
+# Overlay actual data points
+sns.stripplot(x='Emotion', y='Score', data=df, size=8, color='red', jitter=True)
+
+plt.title('Outlier Detection in Emotion Confidence Scores')
+plt.ylim(0, 1.1)
+plt.grid(True)
+plt.show()
